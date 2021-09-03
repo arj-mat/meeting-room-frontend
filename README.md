@@ -1,27 +1,26 @@
-# AppFrontEnd
+# Projeto de Meeting Room
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
+Projeto final produzido após o Bootcamp Fullstack Developer (Java + Angular) do Santander na Digital Innovation One.
 
-## Development server
+Ainda que inspirado no projeto final proposto originalmente no Bootcamp, este projeto é completamente diferente, porém abrange igualmente todas as matérias ensinadas ao longo do curso.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Recursos
 
-## Code scaffolding
+Permite a criação de salas virtuais para bate-papo em tempo real por meio de mensagens de texto e gravações de voz direto do navegador (sem compatibilidade mobile).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Inspirado nas versões antigas do Skype, no WhatsApp Web e no [projeto Audicord](https://github.com/arj-mat/Audicord).
 
-## Build
+## Repositório do Backend em Java, detalhes do projeto e demonstração
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+https://github.com/arj-mat/meeting-room
 
-## Running unit tests
+## Frontend
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Dependências utilizadas
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- MDB Bootstrap para Angular (UI)
+- NGX Cookie Service (cookies)
+- Moment.JS (formatação de datas)
+- Howler.JS (reprodução de áudio)
+- SockJS (comunicação via WebSocket)
+- StompJS (comunicação via WebSocket)
