@@ -1,0 +1,13 @@
+<div class="card text-light d-flex flex-row">
+    <app-user-avatar [name]="author.displayName" [image]="author.avatarURL"></app-user-avatar>
+
+    <div class="middle d-flex flex-fill flex-column">
+        <div class="message-info dflex flex-row">
+            <span class="user-name">{{author.displayName}}</span>
+            <span class="time">{{formatedDate}}</span>
+        </div>
+        <div class="card-body bg-light text-dark">
+            <p style="white-space: pre;">{{message.content}}</p>
+        </div>
+    </div>
+</div>

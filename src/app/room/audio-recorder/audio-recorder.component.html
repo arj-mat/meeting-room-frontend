@@ -1,0 +1,36 @@
+<div class="recording-container" *ngIf="isRecording; else record_button">
+    <app-spinner *ngIf="isProccessingData; else recording_controls" spinnerClass="text-danger"
+        class="m-2 flex-fill align-self-center">
+    </app-spinner>
+
+    <ng-template #recording_controls>
+        <div class="left">
+            <button (click)="stopRecording()" type="button"
+                class="btn btn-outline-danger d-flex align-items-center justify-content-center">
+                <i class="fas fa-stop" style="font-size: 20px; margin-right: 8px;"></i> Parar e enviar
+            </button>
+        </div>
+
+        <div class="middle">
+            <i class="fas fa-microphone text-danger fs-5"></i>
+            <span>
+                <B>{{recordingDuration}}</B>
+                <br>
+                <span style="color: var(--mdb-gray);">02:00</span>
+            </span>
+        </div>
+
+        <div class="right">
+            <button (click)="cancelRecording()" type="button"
+                class="btn btn-outline-danger d-flex align-items-center justify-content-center">
+                Cancelar
+            </button>
+        </div>
+    </ng-template>
+
+</div>
+
+<ng-template #record_button>
+    <button (click)="requestAudioRecording()" class="btn btn-danger"><i class="fas fa-microphone me-2"></i>
+        Gravar áudio</button>
+</ng-template>

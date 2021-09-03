@@ -1,0 +1,33 @@
+<form [formGroup]="loginFields" (ngSubmit)="submit()">
+    <mdb-form-control class="form-white">
+        <input autofocus mdbInput type="text" id="nameInput" formControlName="name" class="form-control" />
+        <label mdbLabel class="form-label" for="nameInput">Nome</label>
+
+        <span class="badge text-danger text-start justify-content-start" style="white-space: pre-line"
+            *ngIf="nonPristineFieldIsInvalid('name')">
+            {{getReasonForInvalidName()}}
+        </span>
+    </mdb-form-control>
+
+    <mdb-form-control class="form-white">
+        <input mdbInput type="text" id="emailInput" formControlName="email" name="email" class="form-control"
+            autocomplete />
+        <label mdbLabel class="form-label" for="emailInput">Email (opcional)</label>
+
+        <span class="badge text-danger" *ngIf="nonPristineFieldIsInvalid('email')">
+            Informe um e-mail válido ou deixe em branco.
+        </span>
+    </mdb-form-control>
+
+    <div class="bottom d-flex flex-row flex-fill justify-content-between">
+        <a [routerLink]="['../']">
+            <button type="button" class="btn btn-light"><i class="fas fa-arrow-left me-1"></i>
+                Voltar</button>
+        </a>
+
+        <button type="submit" [disabled]="loginFields.invalid" class="btn btn-secondary"><i
+                class="fas fa-arrow-right me-1"></i>
+            Entrar</button>
+    </div>
+
+</form>

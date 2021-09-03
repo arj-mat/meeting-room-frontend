@@ -1,0 +1,13 @@
+<span *ngIf="image != undefined; else avatar_without_image" class="user-avatar has-image"
+    [style.background-image]="'url(\'' + image + '\')'">
+    <i *ngIf="isOffline"></i>
+    <span class="hover-mask"></span>
+</span>
+
+<ng-template #avatar_without_image>
+    <span class="user-avatar" [class.offline]="isOffline" [style.background-color]="avatarColor">
+        {{getNameAbbreviation()}}
+        <i *ngIf="isOffline"></i>
+        <span class="hover-mask"></span>
+    </span>
+</ng-template>

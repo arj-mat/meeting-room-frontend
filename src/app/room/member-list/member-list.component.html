@@ -1,0 +1,21 @@
+<div *ngIf="app.room != undefined; else loading" class="container">
+
+    <div *ngFor="let member of app.room.memberList" class="card bg-dark text-light">
+        <div class="card-body">
+            <div class="d-flex flex-row align-items-center">
+                <app-user-avatar [name]="member.displayName" [image]="member.avatarURL"></app-user-avatar>
+
+                <h5 class="card-title m-0">{{member.displayName}}</h5>
+            </div>
+
+            <p class="card-text" *ngIf="member.isInRoom == true && member.id != app.me!.id"><span
+                    class="status bg-success"></span> </p>
+            <p class="card-text" *ngIf="member.isInRoom == false"><span class="status bg-light"></span> Offline</p>
+            <p class="card-text" *ngIf="member.id == app.me!.id">Você</p>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-spinner class="text-center p-4"></app-spinner>
+</ng-template>

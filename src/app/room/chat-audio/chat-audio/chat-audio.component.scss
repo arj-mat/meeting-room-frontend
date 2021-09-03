@@ -1,0 +1,71 @@
+.container {
+    display: flex;
+    align-self: stretch;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.container .left {
+    margin-right: 0.5rem;
+}
+
+.container button:hover {
+    color: lime;
+}
+
+.container .middle {
+    display: flex;
+    flex: 11;
+    flex-direction: column;
+}
+
+.container .middle .info {
+    font-size: 12px;
+    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+}
+
+.container .middle .info button {
+    margin-left: 2px;
+    color: white;
+    font-size: 10px;
+    padding: 3px 8px 2px 6px;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.container .middle .info button.active {
+    border-bottom-color: var(--mdb-success);
+}
+
+.container .middle .options i {
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--mdb-light);
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.container .middle .options i:hover {
+    color: var(--mdb-teal);
+}
+
+.container .right {
+    align-self: center;
+    font-size: 12px;
+    color: gray;
+    flex: 1 0;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+    text-align: right;
+    margin-left: 4px;
+    min-width: 30%;
+}
+
+.container .right button:hover {
+    border-color: var(--mdb-success);
+}

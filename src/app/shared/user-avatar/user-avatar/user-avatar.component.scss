@@ -1,0 +1,58 @@
+:host {
+    height: 50px;
+    width: 50px; 
+    margin-right: 8px;
+    display: flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.user-avatar {
+    flex: 1 1;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    user-select: none;
+    cursor: pointer; 
+    font-size: 20px;
+}
+
+.user-avatar.has-image {
+    color: transparent;
+    background-color: transparent;
+}
+
+.user-avatar i {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 38px;
+    color: rgba(255, 255, 255, 0.694);
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.446);
+    padding-top: 7px;
+    backdrop-filter: blur(2px);
+    border-radius: 50%;
+}
+
+.user-avatar .hover-mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: brightness(130%);
+    border-radius: 50%;
+    display: none;
+}
+
+.user-avatar:hover .hover-mask {
+    display: block;
+}

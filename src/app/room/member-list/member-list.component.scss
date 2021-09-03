@@ -1,0 +1,77 @@
+.container {
+    overflow-y: auto;
+}
+
+.card {
+    padding: 0px;
+    cursor: pointer;
+    border: 2px solid #2b2b2b;
+    margin: 0.5rem;
+    margin-top: 1rem;
+}
+
+.card.offline {
+    background-color: rgb(60, 60, 60)!important;
+}
+
+.card:hover {
+    border: 2px solid teal;
+}
+
+.card .card-body {
+    padding: 4px;
+}
+
+.card .user-avatar {
+    height: 48px;
+    width: 48px;
+    background-color: teal;
+    text-align: center;
+    line-height: 48px;
+    border-radius: 50%;
+    color: white;
+    margin-right: 8px;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    user-select: none;
+}
+
+.card .user-avatar.has-image {
+    color: transparent;
+    background-color: transparent;
+}
+
+.card .user-avatar i {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 38px;
+    color: rgba(255, 255, 255, 0.694);
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.446);
+    padding-top: 6px;
+    backdrop-filter: blur(2px);
+    border-radius: 50%;
+}
+
+.card .card-text {
+    margin-top: -10px;
+}
+
+.card .card-text .status {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.card .card-text {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-left: calc(48px + 8px);
+}

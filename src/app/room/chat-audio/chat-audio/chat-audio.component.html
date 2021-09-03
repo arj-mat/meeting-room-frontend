@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="left">
+        <button (click)="playOrStop()" type="button"
+            class="btn btn-lg btn-floating d-flex align-items-center justify-content-center"
+            [class.btn-outline-success]="!hasBeenPlayedBefore" [class.btn-outline-light]="hasBeenPlayedBefore"
+            [disabled]="isDefinitivelyUnavailable || isSynchronizing">
+
+            <div *ngIf="isSynchronizing; else not_synchronizing" class="spinner-border" role="status">
+                <span class="visually-hidden">...</span>
+            </div>
+
+            <ng-template #not_synchronizing>
+                <i *ngIf="!isDefinitivelyUnavailable" class="fas" [class.fa-play-circle]="!isPlaying"
+                    [class.fa-stop-circle]="isPlaying" style="font-size: 26px;"></i>
+
+                <i *ngIf="isDefinitivelyUnavailable" class="fas fa-microphone-slash text-light"
+                    style="font-size: 26px;"></i>
+            </ng-template>
+
+        </button>
+    </div>
+
+    <div class="middle">
+        <span class="title">Áudio de {{author.displayName}}</span>
+        <span class="info">
+            <span *ngIf="isPlaying">
+                <span class="text-success">{{currentAudioPosition}}</span>
+                /
+            </span>
+            <span>{{audioDuration}}</span>
+
+            <span class="ms-1" *ngIf="isPlaying">
+                <button class="btn btn-sm btn-outline-light" [class.active]="currentPlaybackRate == 1"
+                    (click)="setPlaybackRate(1)">1x</button>
+                <button class="btn btn-sm btn-outline-light" [class.active]="currentPlaybackRate == 1.5"
+                    (click)="setPlaybackRate(1.5)">1.5x</button>
+                <button class="btn btn-sm btn-outline-light" [class.active]="currentPlaybackRate == 2"
+                    (click)="setPlaybackRate(2)">2x</button>
+            </span>
+        </span>
+    </div>
+
+    <span class="right">
+        <span *ngIf="isPlaying; else status_if_not_playing" class="badge bg-success text-light">Ouvindo</span>
+
+        <ng-template #status_if_not_playing>
+
+            <span *ngIf="isDefinitivelyUnavailable; else notDefinitivelyUnavailable"
+                class="badge bg-dark text-light">Indisponível</span>
+
+            <ng-template #notDefinitivelyUnavailable>
+                <span *ngIf="!hasBeenPlayedBefore" class="badge bg-success text-light">{{isSynchronizing ?
+                    "Sincronizando..." : "Novo"}}</span>
+                <span *ngIf="hasBeenPlayedBefore" class="badge bg-light text-dark">Ouvido</span>
+            </ng-template>
+
+        </ng-template>
+
+        <br>
+
+        {{media.date | userFriendlyDateTime}}
+    </span>
+    <!--
+
+
+    <span class="right justify-content-end">
+        <div mdbDropdown class="dropdown">
+            <button class="btn btn-outline-dark text-light btn-sm" aria-expanded="false" mdbDropdownToggle><i
+                    class="fas fa-ellipsis-h"></i></button>
+
+            <ul mdbDropdownMenu class="dropdown-menu">
+                <li><a onclick="this.parentElement.parentElement.parentElement.parentElement.parentElement.click()"
+                        class="dropdown-item"><i class="fas fa-download me-2"></i>
+                        Baixar</a></li>
+                <li><a class="dropdown-item"><i class="fas fa-trash me-2"></i> Excluir</a></li>
+            </ul>
+        </div>
+
+    </span>
+-->
+</div>

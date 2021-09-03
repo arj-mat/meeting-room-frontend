@@ -1,0 +1,49 @@
+<div class="card container-md bg-dark">
+    <div class="card-body text-light">
+        <h3>Criar uma sala de reunião</h3>
+        <hr />
+        <form [formGroup]="roomFields" (ngSubmit)="submit()">
+            <mdb-form-control class="form-white">
+                <input autofocus mdbInput type="text" id="nameInput" formControlName="name" class="form-control" />
+                <label mdbLabel class="form-label" for="nameInput">Nome da sala</label>
+
+                <span class="badge text-danger text-start justify-content-start" style="white-space: pre-line"
+                    *ngIf="nonPristineFieldIsInvalid('name')">
+                    {{getReasonForInvalidName()}}
+                </span>
+            </mdb-form-control>
+
+            <div class="p-4" style="font-size: 14px;">
+                <i class="fas fa-info text-info me-2"></i> Ao criar uma sala, note que:
+                <ul>
+                    <li>Qualquer pessoa com o link poderá entrar;</li>
+                    <li>As mensagens de texto são armazenadas no servidor e sem criptografia;</li>
+                    <li>Áudios gravados não são armazenados no servidor e podem se tornar indisponíveis conforme os
+                        membros se desconectam da sala.</li>
+                </ul>
+            </div>
+
+            <p *ngIf="errorMessage" class="m-2 text-danger">Não foi possível criar a sala.<br>{{errorMessage}}</p>
+
+            <div class="bottom d-flex flex-row flex-fill justify-content-between">
+
+
+                <a href="https://github.com/arj-mat/projeto-meeting-room" target="_blank">
+                    <button class="btn btn-light" type="button">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </button>
+                </a>
+
+                <div *ngIf="isLoading" class="spinner-border text-secondary" role="status">
+                    <span class="visually-hidden">...</span>
+                </div>
+
+                <button *ngIf="!isLoading" type="submit" [disabled]="roomFields.invalid" class="btn btn-secondary">
+                    <i class="fas fa-arrow-right me-1"></i>
+                    Criar sala
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

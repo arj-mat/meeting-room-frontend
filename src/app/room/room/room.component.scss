@@ -1,0 +1,97 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+header nav {
+    height: 46px;
+}
+
+.room-container .member-list {
+    max-width: 20%;
+    min-width: 300px;
+    max-height: calc(100vh - 46px);
+    overflow-y: auto;
+    display: flex;
+}
+
+.room-container .media {
+    max-width: 22%;
+    min-width: 380px;
+    max-height: calc(100vh - 46px);
+}
+
+.room-container .media .media-container {
+    max-height: inherit;
+    overflow-y: auto;
+}
+
+.room-container .media .volume-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: -8px;
+ }
+
+ .room-container .media .volume-container .range-container {
+     flex: 1 1;
+    margin-top: -16px;
+    margin-left: 13px;
+    margin-right: 13px;
+ }
+
+.room-container .chat {
+    flex-direction: column-reverse;
+    max-height: calc(100vh - 46px); // 100vh - header nav's height
+}
+
+.room-container .chat .message-container {
+    padding: 1.5rem;
+    padding-bottom: 0;
+    overflow-y: auto;
+}
+
+.room-container .chat .user-input {
+    min-height: 130px;
+    border-top: 1px solid rgb(65, 65, 65);
+    padding-top: 1rem;
+}
+
+.room-container .chat .user-input textarea {
+    border-radius: 6px;
+    margin: 6px;
+    border-color: transparent;
+    background-color: #1e1e1e;
+    resize: none;
+    border: none !important;
+}
+
+.media .media-buttons {
+    max-height: 122px;
+    border-top: 1px solid #414141;
+    padding-top: 20px;
+}
+
+.media .media-buttons .audio {
+    flex: 1 1;
+    display: flex;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.media .media-buttons .audio button {
+    font-size: 14px;
+}
+
+.media .media-buttons .other {
+    display: flex;
+    flex: 1 1;
+    flex-direction: row;
+    justify-content: center;
+}

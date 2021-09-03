@@ -1,0 +1,18 @@
+<p class="m-2">Por favor, identifique-se antes de entrar na reunião.</p>
+
+<div *ngIf="showSharingOptions" class="justify-content-center p-3" style="font-size: 14px">
+    Link da sala: <input type="text" class="sharing-link bg-dark border border-info rounded-pill pe-2 ps-2 me-2"
+        [value]="roomSharingURL" onclick="this.selectionStart = 0; this.selectionEnd = this.value.length" />
+</div>
+
+<p class="bottom">
+    <button disabled class="btn btn-danger me-4"><i class="fab fa-google fs-6 me-2"></i> Entrar com Google</button>
+    <a
+        [href]="'https://discord.com/api/oauth2/authorize?client_id=882309719367249981&redirect_uri=https%3A%2F%2Fproj-meeting-room.herokuapp.com%2Fjoin-from%2Fdiscord&response_type=code&scope=identify&state=' + roomId">
+        <button class="btn btn-primary me-4"><i class="fab fa-discord fs-6 me-2"></i>
+            Entrar com Discord</button>
+    </a>
+    <a [routerLink]="['/join', roomId, 'with-email']">
+        <button class="btn btn-light">Entrar com nome</button>
+    </a>
+</p>

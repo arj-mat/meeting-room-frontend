@@ -1,0 +1,81 @@
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light"
+        style="background: linear-gradient(180deg, #181818, #202020); border-bottom: 1px solid #323232;">
+        <div class="container-fluid text-light justify-content-center">
+            <span> <i class="fas fa-hands-helping"></i> {{app.room?.name}}</span>
+        </div>
+    </nav>
+</header>
+
+<div class="room-container d-flex flex-fill flex-row">
+    <div class="member-list p-2 flex-fill flex-column">
+        <p class="m-0 p-0 text-center"><i class="fas fa-users" style="color: teal;"></i></p>
+
+        <app-member-list></app-member-list>
+    </div>
+
+    <div class="chat d-flex flex-fill bg-dark">
+        <div class="user-input d-flex flex-row">
+            <app-user-avatar *ngIf="app.me != undefined" class="me-0 ms-2" [name]="app.me!.displayName"
+                [image]="app.me!.avatarURL">
+            </app-user-avatar>
+            <textarea mdbInput class="form-control text-light" placeholder="Escrever mensagem"
+                (keypress)="onChatTextAreaKeypress($event)"></textarea>
+        </div>
+
+        <div *ngIf="app.room != undefined; else message_container_loading" class="message-container">
+            <app-chat-message *ngFor="let message of app.room?.chatMessages" [message]="message"></app-chat-message>
+        </div>
+
+        <ng-template #message_container_loading>
+            <app-spinner class="flex-fill p-4"></app-spinner>
+        </ng-template>
+    </div>
+
+    <div class="media d-flex flex-fill flex-column">
+        <p class="m-0 p-2 text-center"><i class="fas fa-play" style="color: teal;"></i></p>
+
+        <div class="form-check d-flex justify-content-center">
+            <input mdbCheckbox class="form-check-input" type="checkbox" value="" [checked]="false"
+                (checkboxChange)="audioAutoPlayChange($event)" id="flexCheckAudioAutoPlay" />
+            <label class="form-check-label" for="flexCheckAudioAutoPlay">
+                Reproduzir áudios automaticamente
+            </label>
+        </div>
+
+        <div class="volume-container">
+            <span>Volume</span>
+            <div class="range-container">
+                <mdb-range [min]="0" [max]="100" [value]="'50'" (rangeValueChange)="audioVolumeChange($event)">
+                </mdb-range>
+            </div>
+        </div>
+
+        <hr class="me-2 ms-2" />
+
+        <div *ngIf="app.room != undefined; else media_container_loader"
+            class="media-container flex-fill flex-column-reverse align-items-stretch">
+            <app-chat-audio *ngFor="let media of app.room.media" [media]="media" [volumeEmmiter]="audioVolumeEmitter"
+                [initialVolume]="currentAudioVolume">
+            </app-chat-audio>
+        </div>
+
+        <ng-template #media_container_loader>
+            <app-spinner class="flex-fill p-4"></app-spinner>
+        </ng-template>
+
+        <div class="media-buttons d-flex flex-fill flex-column m-2">
+            <app-audio-recorder></app-audio-recorder>
+
+            <div class="d-flex flex-fill flex-row">
+                <button disabled class="btn btn-light flex-fill me-2"><i class="fas fa-external-link-square-alt"></i>
+                    Anexar
+                    link</button>
+                <button disabled class="btn btn-light flex-fill"><i class="fas fa-file-alt"></i> Anexar arquivo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-connecting-overlay *ngIf="app.room == undefined"></app-connecting-overlay>
