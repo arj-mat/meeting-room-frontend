@@ -56,8 +56,7 @@
 
         <div *ngIf="app.room != undefined; else media_container_loader"
             class="media-container flex-fill flex-column-reverse align-items-stretch">
-            <app-chat-audio *ngFor="let media of app.room.media" [media]="media" [volumeEmmiter]="audioVolumeEmitter"
-                [initialVolume]="currentAudioVolume">
+            <app-chat-audio *ngFor="let media of app.room.media" [media]="media" [volume]="volumeObs | async">
             </app-chat-audio>
         </div>
 

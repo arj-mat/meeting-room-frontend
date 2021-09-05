@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MdbCheckboxChange } from 'mdb-angular-ui-kit/checkbox';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable, Subscriber } from 'rxjs';
 import { ApplicationService } from 'src/app/core/application.service';
 import { MessagingEvents } from 'src/app/core/messaging.service.events';
 import { ReceivedRoomInfo } from 'src/app/core/room/received-room-info';
@@ -19,11 +20,14 @@ export class RoomComponent implements OnInit {
     public roomId: string;
     public audioAutoPlay: boolean = false;
 
-    public audioVolumeEmitter: EventEmitter<number> = new EventEmitter( false );
-    public currentAudioVolume: number = 50;
+    private audioVolumeEmitter: EventEmitter<number> = new EventEmitter( false );
 
-    constructor( public app: ApplicationService, private cookies: CookieService, private route: ActivatedRoute, private router: Router, private httpClient: HttpClient, private msnService: MessagingService ) {
+    public volumeObs: Observable<number>;
+
+    constructor( public app: ApplicationService, private cookies: CookieService, private route: ActivatedRoute, private router: Router, private msnService: MessagingService ) {
         this.roomId = this.route.snapshot.paramMap.get( "id" ) || "";
+
+        this.volumeObs = this.audioVolumeEmitter.asObservable();
     }
 
     ngOnInit(): void {
@@ -45,9 +49,7 @@ export class RoomComponent implements OnInit {
     }
 
     public audioVolumeChange( e: { value: string } ) {
-        this.currentAudioVolume = parseInt( e.value );
-
-        this.audioVolumeEmitter.emit( this.currentAudioVolume );
+        this.audioVolumeEmitter.emit( parseInt( e.value ) );
     }
 
     private onNewMessageReceived( message: ReceivedRoomInfo.ChatMessage ) {

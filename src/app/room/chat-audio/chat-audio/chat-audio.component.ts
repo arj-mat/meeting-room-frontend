@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit } from '@angular/core';
 import { Howl } from 'howler';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 import { ApplicationService } from 'src/app/core/application.service';
 import { MessagingService } from 'src/app/core/messaging.service';
 import { MessagingEvents } from 'src/app/core/messaging.service.events';
@@ -17,11 +18,7 @@ export class ChatAudioComponent implements OnInit {
     @Input()
     public media!: ReceivedRoomMedia;
 
-    @Input()
-    public volumeEmmiter!: EventEmitter<number>;
-
-    @Input()
-    public initialVolume: number = 50;
+    private currentVolume: number = 50;
 
     public author!: RoomMember;
 
@@ -43,7 +40,6 @@ export class ChatAudioComponent implements OnInit {
 
     ngOnInit(): void {
         this.author = this.app.room?.getMemberById( this.media.authorMemberId )!;
-        this.volumeEmmiter.subscribe( this.volumeChangeCallback.bind( this ) );
 
         this.hasBeenPlayedBefore = localStorage.getItem( `media_played_${this.media.id}` ) != null;
 
@@ -57,8 +53,14 @@ export class ChatAudioComponent implements OnInit {
         this.scrollListToBottom();
     }
 
-    private volumeChangeCallback( volume: number ) {
-        this.howl?.volume( ( volume || 0 ) / 100 );
+    @Input()
+    public set volume( value: number | undefined | null ) {
+        if ( value === undefined || value === null )
+            this.currentVolume = 50;
+        else
+            this.currentVolume = value;
+
+        this.howl?.volume( ( this.currentVolume || 0 ) / 100 );
     }
 
     private onMediaSyncDataReceived( received: RoomMediaSyncData ) {
@@ -123,7 +125,7 @@ export class ChatAudioComponent implements OnInit {
             autoplay: autoPlay,
             loop: false,
             src: [ this.media.data! ],
-            volume: ( this.initialVolume / 100 ) || 0
+            volume: ( this.currentVolume / 100 ) || 0
         } )
             .once( 'load', this.setAudioDuration.bind( this ) )
             .on( 'play', this.onPlay.bind( this ) )
