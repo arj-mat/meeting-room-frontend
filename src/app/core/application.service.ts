@@ -68,6 +68,8 @@ export class ApplicationService {
     }
 
     public async requestToJoinRoomFromDiscord( roomId: string, token: string ) {
+        console.log( "requestToJoinRoomFromDiscord" );
+
         this.httpClient.get<RoomAccessInfo>( `${HOST}/api/join-room/${roomId}/from-discord?token=${token}` ).toPromise()
             .then( response => {
                 this.saveRoomAccessInfo( response );

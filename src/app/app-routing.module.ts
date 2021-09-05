@@ -20,24 +20,12 @@ const routes: Routes = [
     },
     {
         path: 'join/:id',
-        component: JoinScreenComponent,
-        children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                component: JoinOptionsComponent
-            },
-            {
-                path: 'with-email',
-                component: JoinWithEmailComponent,
-                pathMatch: 'full'
-            }
-        ]
+        loadChildren: () => import( './join/join-screen/join-screen.module' ).then( m => m.JoinScreenModule )
     },
     {
         path: 'room/:id',
         pathMatch: 'full',
-        component: RoomComponent
+        loadChildren: () => import( './room/room/room.module' ).then( m => m.RoomModule )
     }
 ];
 
